@@ -1,0 +1,64 @@
+# Configuration for Concept Activation Vectors (CAV) testing
+
+# Random seed for reproducibility
+random_seed: 42
+
+# Dataset configuration
+dataset:
+  name: "iris"  # Options: "iris", "synthetic"
+  test_size: 0.3
+  feature_names: ["sepal_length", "sepal_width", "petal_length", "petal_width"]
+
+# Model configuration
+model:
+  hidden_dims: [64, 32]
+  dropout_rate: 0.2
+
+# Training configuration
+training:
+  learning_rate: 0.001
+  weight_decay: 1e-4
+  epochs: 100
+  batch_size: 32
+
+# CAV configuration
+cav:
+  layer_name: "network.0"  # Layer to extract activations from
+  regularization: 0.01     # L2 regularization for CAV training
+
+# Concept definitions
+concepts:
+  random_seed: 42
+  concept_definitions:
+    - name: "setosa_concept"
+      classes: [0]  # Setosa class
+      description: "Concept representing Setosa iris characteristics"
+    
+    - name: "versicolor_concept"
+      classes: [1]  # Versicolor class
+      description: "Concept representing Versicolor iris characteristics"
+    
+    - name: "virginica_concept"
+      classes: [2]  # Virginica class
+      description: "Concept representing Virginica iris characteristics"
+
+# Evaluation configuration
+evaluation:
+  n_permutations: 1000  # Number of permutations for statistical testing
+  metrics:
+    - "concept_completeness"
+    - "concept_sensitivity"
+    - "cav_accuracy"
+    - "statistical_significance"
+
+# Visualization configuration
+visualization:
+  output_dir: "assets/plots"
+  save_plots: true
+  interactive_dashboard: true
+  plot_types:
+    - "cav_direction"
+    - "concept_sensitivity"
+    - "evaluation_metrics"
+    - "model_performance"
+    - "concept_comparison"
